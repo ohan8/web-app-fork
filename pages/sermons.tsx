@@ -9,7 +9,7 @@ import BottomAudioBar from '../components/BottomAudioBar';
 
 import { useEffect } from 'react';
 import useAudioPlayer from '../context/audio/audioPlayerContext';
-import { Sermon } from '../context/types';
+import { AUDIO_PLAYER, Sermon } from '../context/types';
 import { getSermons } from '../firebase/audio_functions';
 import * as admin from 'firebase-admin';
 import nookies from 'nookies';
@@ -22,7 +22,7 @@ const Sermons: NextPage<Props> = ({ sermons }: Props) => {
   const {
     playing,
     playlist,
-    setPlaylist,
+    dispatch,
     currentSermon,
     currentSecond,
     currentPlayedState,
@@ -30,7 +30,7 @@ const Sermons: NextPage<Props> = ({ sermons }: Props) => {
 
   useEffect(() => {
     console.log('From SSR:', sermons);
-    setPlaylist(sermons);
+    dispatch({ type: AUDIO_PLAYER.SET_PLAYLIST, playlist: sermons });
   }, []);
   // const handleSermonClick = (sermon: Sermon) => {
   //   // console.log('handle click');
@@ -57,8 +57,15 @@ const Sermons: NextPage<Props> = ({ sermons }: Props) => {
                 <SermonListCard
                   sermon={sermon}
                   playing={playing}
-                  currentPlayedState={currentPlayedState}
-                  currentSecond={currentSecond}
+                  currentPlayedState={
+                    playing
+                      ? {
+                          playPositionMilliseconds: currentSecond,
+                          state: currentPlayedState,
+                        }
+                      : sermon.playedState
+                  }
+                  dispatch={dispatch}
                   key={key}
                 />
               );
@@ -67,8 +74,8 @@ const Sermons: NextPage<Props> = ({ sermons }: Props) => {
                 <SermonListCard
                   sermon={sermon}
                   playing={false}
-                  currentPlayedState={sermon.playedState.state}
-                  currentSecond={0}
+                  currentPlayedState={sermon.playedState}
+                  dispatch={dispatch}
                   key={key}
                 />
               );

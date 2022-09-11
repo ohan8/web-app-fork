@@ -3,7 +3,7 @@ import {
   QueryDocumentSnapshot,
   SnapshotOptions,
 } from 'firebase/firestore';
-import { Sermon, FirebaseSermon } from '../context/types';
+import { Sermon, FirebaseSermon, PLAY_STATE } from '../context/types';
 import { getDateString } from '../utils/sermonUtils';
 /* This converter takes care of converting a Sermon to a FirebaseSermon on upload
  *  and a FirebaseSermon to a Sermon on download.
@@ -32,6 +32,10 @@ export const emptySermon: Sermon = {
   subtitle: '',
   dateMillis: 0,
   durationSeconds: 0,
+  playedState: {
+    playPositionMilliseconds: 0,
+    state: PLAY_STATE.NOT_STARTED,
+  },
   description: '',
   speaker: [],
   scripture: '',

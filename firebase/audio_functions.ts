@@ -1,7 +1,6 @@
 import { db } from './firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { ListenTimeData, PLAY_STATE, Sermon } from '../context/types';
-
 import { createFunction } from '../utils/functionUtils';
 import {
   GetSermonParams,

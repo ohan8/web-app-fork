@@ -17,7 +17,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
 
   "rules": {
     "@typescript-eslint/no-unused-vars": [
@@ -33,7 +33,9 @@
     "react/no-danger": "off", // it's self explainatory that no-danger should be used sparingly
     "react/react-in-jsx-scope": "off", // next.js does not require react in most components
     "no-console": "warn", // no console statements allowed
-    "prettier/prettier": "off" // don't show prettier errors as it will be fixed when saved anyway
+    "prettier/prettier": "off", // don't show prettier errors as it will be fixed when saved anyway
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   },
   "settings": {
     "react": {

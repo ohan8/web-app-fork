@@ -58,7 +58,7 @@ const Navbar: FunctionComponent = () => {
               }}
             >
               <span>From Auth:{auth.currentUser?.email}</span>
-              <span>From Context:{user.email}</span>
+              <span>From Context:{user?.email}</span>
             </div>
           </>
         )}
